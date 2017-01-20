@@ -54,7 +54,10 @@
 	echo "<br> first name ". $namearr[0]; 
 	echo "<br> last name ".$namearr[2];
 
-	//$date = "2017-01-19"  19/01/2017   
+	$date = "2017-01-19"; //  19/01/2017   
+	$datearr = explode("-", $date);
+	krsort($datearr);
+
 
 
 
