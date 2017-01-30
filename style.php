@@ -43,11 +43,15 @@ body
 	background-size: 100% 100%;
 	background-attachment: fixed; 
 */}
-
+<?php header("Content-type:text/css"); 
+	
+	$bgcolor="yellow";
+	
+  ?>
 
 div
 {
-	background-color: yellow;
+	background-color:<?=$bgcolor;?>;
 	height: 100px;
 	width:200px;
 	padding: 10px;
