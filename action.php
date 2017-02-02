@@ -1,9 +1,14 @@
+<?php 
+	require './include/function.php';
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>
 		
 	</title>
+	<link rel="stylesheet" type="text/css" href="table.css">
 </head>
 <body>
 
@@ -32,6 +37,8 @@
 	 			echo "<br > city is ".$_POST['city'];
 	 			$city = $_POST['city'];
 
+
+
 	 		}
 
 	 	if(isset($_POST['gender']))
@@ -54,10 +61,31 @@
 				echo "$hobby ";
 			}
 
-
 		}	
 
 	 ?>
+
+<?php 
+
+	$name = input('name');
+	$address=input('address');
+
+
+
+ ?>
+
+ <table width="500px" align="center">
+ 	<tr>
+ 		<td>Name</td>
+ 		<td><?=$name;?></td>
+ 	</tr>
+
+ 	<tr>
+ 		<td>address</td>
+ 		<td><?=$address;?></td>
+ 	</tr>
+ </table>
+
 
 </body>
 </html>

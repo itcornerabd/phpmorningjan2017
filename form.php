@@ -1,30 +1,31 @@
+<?php require './include/function.php'; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title> Form Demo</title>
 	<style type="text/css">
-			
-			table,tr,td
-			{
-				border:1px black solid;
-				border-collapse: collapse;
-			}
+		
 
 	</style>
+	<link rel="stylesheet" type="text/css" href="table.css">
 
 </head>
 <body>
+<?php 
+	$name = input('name');
 
+ ?>
 
 <a href="action.php?id=1&name=abc">Link to action page</a>
 
-<form name="form1" id="form1" action="action.php" method="POST"  >
+<form name="form1" id="form1" action="form.php" method="POST"  >
 	<center>
 	<table width="400px">
 		<tr>
 			<td> Name</td>
 			<td>
-				<input  type="text" name="name" id="name" placeholder="Enter your name here"  >
+				<input  type="text" name="name" id="name" placeholder="Enter your name here" value="<?=$name?>"  >
 			</td>
 		</tr>
 		<tr>
@@ -36,7 +37,7 @@
 		<tr>
 			<td>Address</td>
 			<td>
-				<textarea name="address" ></textarea>
+				<textarea name="address" ><?=input('address');?></textarea>
 			</td>
 		</tr>
 		<tr>
@@ -44,35 +45,39 @@
 			<td>
 				<select name="city" >
 					<option value="">--select City--</option>
-					<option value="1" >A.bad</option>
-					<option value="2"  >Pune</option>
-					<option value="3"  >Mumbai</option>	
+					<option value="1" <?php if(input('city')==1) {echo "selected";} ?>  >A.bad</option>
+					<option value="2" <?php if(input('city')==2) {echo "selected";} ?>  >Pune</option>
+					<option value="3"  <?php if(input('city')==3) {echo "selected";} ?>>Mumbai</option>	
 				</select>
 			</td>
 		</tr>
 		<tr>
 			<td>Gender</td>
 			<td>
-				<input type="radio" name="gender" value="MALE"  > MALE
-				<input type="radio" name="gender" value="FEMALE" > FEMALE
+				<input type="radio" name="gender" value="MALE"  <?php if(input('gender')=="MALE") {echo "checked";} ?>  > MALE
+				<input type="radio" name="gender" value="FEMALE" <?php if(input('gender')=="FEMALE") {echo "checked";} ?> > FEMALE
 			</td>
 		</tr>
 		<tr>
 			<td>Hobby</td>
 			<td>
-				<input type="checkbox" name="SPORT" value="SPORT" > SPORT
+				<input type="checkbox" name="SPORT" value="SPORT"  > SPORT
 				<input type="checkbox" name="DANCE" value="DANCE"   > DANCE
-				<input type="checkbox" name="SINGING" value="SINGING"> SINGING
+				<input type="checkbox" name="SINGING" value="SINGING" > SINGING
 
 			</td>
 		</tr>
 		<tr>
 			<td>Hobby</td>
 			<td>
-				<input type="checkbox" name="hobby[]" value="SPORT" > SPORT
-				<input type="checkbox" name="hobby[]" value="DANCE"   > DANCE
-				<input type="checkbox" name="hobby[]" value="SINGING"> SINGING
-				<input type="checkbox" name="hobby[]" value="PAINTING"> PAINTING
+				<input type="checkbox" name="hobby[]" value="SPORT" 
+				<?php if(in_array("SPORT", input('hobby' , false) )) {echo "checked"; } ?>  > SPORT
+				<input type="checkbox" name="hobby[]" value="DANCE" 
+					<?php if(in_array("DANCE", input('hobby' , false) )) {echo "checked"; } ?>   > DANCE
+				<input type="checkbox" name="hobby[]" value="SINGING"
+					 <?php if(in_array("SINGING", input('hobby' , false) )) {echo "checked"; } ?> > SINGING
+				<input type="checkbox" name="hobby[]" value="PAINTING"
+					 <?php if(in_array("PAINTING", input('hobby' , false) )) {echo "checked"; } ?> > PAINTING
 
 			</td>
 		</tr>
