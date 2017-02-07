@@ -2,12 +2,12 @@
 
 	$filename=	"desert.jpg"; //  "desert1.jpg" 
 
-	// $pathinfo= pathinfo($filename);
+	 $pathinfo= pathinfo($filename);
 
-	// var_dump($pathinfo);
+	 var_dump($pathinfo);
 
 
-	// echo $pathinfo['filename'] . "1."  . $pathinfo['extension'];
+	 echo $pathinfo['filename'] . "1."  . $pathinfo['extension'];
 
 	if(file_exists("./upload/asdasddesert.jpg"))
 	{
