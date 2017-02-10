@@ -48,17 +48,6 @@
 </ul>
 
 <?php 
-		if(cond):
-
-		endif 
-		
-		for():
-		endfor
-		
-		while():
-
-		endwhile	
-
 
  ?>
 
