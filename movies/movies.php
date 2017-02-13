@@ -9,6 +9,8 @@
 </head>
 <body>
 <center>
+<a href="addmovie.php">Add New Movie</a>	
+
 <table width="700px" >
 	<tr>
 		<th>id</th>
@@ -17,9 +19,10 @@
 		<th>Release Date</th>
 		<th>Category</th>
 		<th>Details</th>
+		<th>Delete</th>
 	</tr>
 <?php 
-	$query = "select  m.* , c.name as categoryname  from  movies as m  , categories as c  where m.category_id = c.id";
+	$query = "select  m.* , c.name as categoryname  from  movies as m  , categories as c  where m.category_id = c.id ";
 
 	$rows = mysqli_query($con,$query); 
 
@@ -37,6 +40,13 @@
 		<td><?=$rs['categoryname']?></td>
 		<td>
 		<a href="detail.php?id=<?=$rs['id']?>">	Details</a>
+		</td>
+		<td>
+			<?php if($rs['active']): ?>	
+				<a href="delete.php?id=<?=$rs['id']?>&ACTION=DELETE">	Delete</a>
+			<?php else: ?>
+				<a href="delete.php?id=<?=$rs['id']?>&ACTION=REVERT">	Revert</a>
+			<?php endif ?>
 		</td>
 	</tr>
 
