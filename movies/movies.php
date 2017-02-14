@@ -20,6 +20,7 @@
 		<th>Category</th>
 		<th>Details</th>
 		<th>Delete</th>
+		<th>Edit</th>
 	</tr>
 <?php 
 	$query = "select  m.* , c.name as categoryname  from  movies as m  , categories as c  where m.category_id = c.id ";
@@ -47,6 +48,9 @@
 			<?php else: ?>
 				<a href="delete.php?id=<?=$rs['id']?>&ACTION=REVERT">	Revert</a>
 			<?php endif ?>
+		</td>
+		<td>
+			<a href="editmovie.php?id=<?=$rs['id']?>">	Edit</a>
 		</td>
 	</tr>
 

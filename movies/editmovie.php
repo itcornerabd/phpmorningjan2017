@@ -1,9 +1,8 @@
-<?php require('./include/constr.php'); ?>
-
 <?php 
+require './include/constr.php';
 
-	// var_dump($_POST);
-	
+
+	$id = input('id');
 
 
 	$submit = input('submit');
@@ -12,9 +11,7 @@
 	$release_date = input('release_date');
 	$plot =input('plot');
 	$category_id = input('category_id');
-
-
-	$errormsg = [];
+	//var_dump($_REQUEST);
 	if(!empty($submit))
 	{
 		if(empty($name))
@@ -24,7 +21,6 @@
 
 		if(empty($category_id))
 			$errormsg[]= "category can not be blank";
-
 
 		$query = "select * from movies where name ='$name' ";
 		$rows = mysqli_query($con,$query);
@@ -36,16 +32,14 @@
 
 
 
-
-
 		if(count($errormsg)==0)
 		{
-			$query = "insert into movies (name,cast	,release_date,plot,category_id) values ('$name','$cast','$release_date','$plot' , $category_id ) ";
+			$query = "update movies set name ='$name' , cast ='$cast' , release_date ='$release_date' , plot ='$plot' , category_id='$category_id' where id=$id ";
 
 			$result = mysqli_query($con,$query);
 
 			if(!$result)
-				die("some error occured in inertion".mysqli_error($con));
+				die("some error occured in update".mysqli_error($con));
 			else
 				header("location:movies.php");
 
@@ -54,15 +48,38 @@
 	}
 
 
+
+
+
+	if(empty($id))
+		die("Invalid Request");
+
+	$query = "Select * from movies where id=$id ";
+
+	$rows = mysqli_query($con,$query);
+
+	if(!$rows)
+		die("error in fetching data");
+
+	if($rs=mysqli_fetch_array($rows))
+	{
+		$name = $rs['name'];
+		$cast =$rs['cast'];
+		$release_date=$rs['release_date'];
+		$plot = $rs['plot'];
+		$category_id=$rs['category_id'];
+	}	
+	else
+	{
+		die("record not found");
+	}
  ?>
-
-
-
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Add Movie</title>
+	<title>Edit Movie</title>
+
 	<link rel="stylesheet" type="text/css" href="./css/table.css">
 </head>
 <body>
@@ -71,8 +88,10 @@
 		<li><?=$error?></li>
 <?php endforeach ?>
 
+
 <center>
-<form method="POST" action="addmovie.php">	
+
+<form method="POST" action="editmovie.php">	
 <table width="500px">
 	<tr>
 		<td>Name</td>
@@ -91,13 +110,13 @@
 	<tr>
 		<td>Release Date</td>
 		<td>
-			<input type="date" name="release_date">
+			<input type="date" name="release_date" value="<?=$release_date?>">
 		</td>
 	</tr>
 	<tr>
 		<td>Plot</td>
 		<td>
-			<textarea name="plot"></textarea>
+			<textarea name="plot"><?=$plot?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -127,14 +146,20 @@
 	<tr>
 		<td colspan="2" align="center">
 			<input type="submit" name="submit" value="SAVE">
+			<input type="hidden" name="id" value="<?=$id?>">
 		</td>
 	</tr>
 </table>
 </form>
 
-</center>
 
+</center>
 
 </body>
 </html>
-<?php require('./include/closestr.php'); ?>
+
+
+
+
+
+ <?php require './include/closestr.php'; ?>
