@@ -11,8 +11,9 @@
 
 	function input($control,$is_string=true)
 	{
+		global $con;
 		if(isset($_REQUEST[$control])) 
-			return $_REQUEST[$control];
+			return mysqli_escape_string($con , $_REQUEST[$control]);
 		else
 			{
 				if($is_string)

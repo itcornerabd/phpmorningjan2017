@@ -1,4 +1,12 @@
-<?php require ("./include/constr.php");  ?>
+<?php 
+session_start();
+
+require ("./include/constr.php");  
+
+if(!isset($_SESSION['username']))
+	header("location:login.php");
+
+?>
 
 
 <!DOCTYPE html>
@@ -8,6 +16,13 @@
 	<link rel="stylesheet" type="text/css" href="./css/table.css">
 </head>
 <body>
+
+Welcome <?php echo $_SESSION['username']; ?> 
+<br>
+
+<a href="logout.php">Logout</a>
+
+
 <center>
 <a href="addmovie.php">Add New Movie</a>	
 
