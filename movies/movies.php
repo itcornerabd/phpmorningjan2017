@@ -6,6 +6,17 @@ require ("./include/constr.php");
 if(!isset($_SESSION['username']))
 	header("location:login.php");
 
+	$query = "select  m.* , c.name as categoryname  from  movies as m  , categories as c  where m.category_id = c.id ";
+
+	$rows = mysqli_query($con,$query); 
+
+	if(!$rows)
+		die("error in fetching movies 101 ");
+
+	$movies = mysqli_fetch_all($rows,MYSQLI_ASSOC );
+
+
+
 ?>
 
 
@@ -17,8 +28,21 @@ if(!isset($_SESSION['username']))
 </head>
 <body>
 
+<h1>Hello world</h1>
+
+
+
 Welcome <?php echo $_SESSION['username']; ?> 
 <br>
+
+<ul>
+	<?php foreach ($movies as $key => $movie) : ?>
+		<li><?=$movie['name']?></li>
+	<?php endforeach ?>	
+
+</ul>
+
+
 
 <a href="logout.php">Logout</a>
 
@@ -37,39 +61,30 @@ Welcome <?php echo $_SESSION['username']; ?>
 		<th>Delete</th>
 		<th>Edit</th>
 	</tr>
-<?php 
-	$query = "select  m.* , c.name as categoryname  from  movies as m  , categories as c  where m.category_id = c.id ";
-
-	$rows = mysqli_query($con,$query); 
-
-	if(!$rows)
-		die("error in fetching movies 101 ");
-
-	while($rs=mysqli_fetch_array($rows)):	
-
+<?php foreach ($movies as $key => $movie) :
  ?>
 	<tr>
-		<td><?=$rs['id']?></td>
-		<td><?=$rs['name']?></td>
-		<td><?=$rs['cast']?></td>
-		<td><?=$rs['release_date']?></td>
-		<td><?=$rs['categoryname']?></td>
+		<td><?=$movie['id']?></td>
+		<td><?=$movie['name']?></td>
+		<td><?=$movie['cast']?></td>
+		<td><?=$movie['release_date']?></td>
+		<td><?=$movie['categoryname']?></td>
 		<td>
-		<a href="detail.php?id=<?=$rs['id']?>">	Details</a>
+		<a href="detail.php?id=<?=$movie['id']?>">	Details</a>
 		</td>
 		<td>
-			<?php if($rs['active']): ?>	
-				<a href="delete.php?id=<?=$rs['id']?>&ACTION=DELETE">	Delete</a>
+			<?php if($movie['active']): ?>	
+				<a href="delete.php?id=<?=$movie['id']?>&ACTION=DELETE">	Delete</a>
 			<?php else: ?>
-				<a href="delete.php?id=<?=$rs['id']?>&ACTION=REVERT">	Revert</a>
+				<a href="delete.php?id=<?=$movie['id']?>&ACTION=REVERT">	Revert</a>
 			<?php endif ?>
 		</td>
 		<td>
-			<a href="editmovie.php?id=<?=$rs['id']?>">	Edit</a>
+			<a href="editmovie.php?id=<?=$movie['id']?>">	Edit</a>
 		</td>
 	</tr>
 
-<?php endwhile ?>
+<?php endforeach ?>
 </table>
 </center>
 

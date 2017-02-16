@@ -7,6 +7,21 @@
 		die("erron in connection");
 
 
+$url =  $_SERVER['REQUEST_URI'];
+
+$pathinfo = pathinfo($url);
+
+if($pathinfo['filename']=="login")
+{
+	if(isset($_SESSION['username']))
+		header("location:movies.php");
+}	
+else
+{
+	if(!isset($_SESSION['username']))
+		header("location:login.php");
+}
+
 
 
 	function input($control,$is_string=true)
