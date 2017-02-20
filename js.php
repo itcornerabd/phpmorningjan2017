@@ -27,9 +27,10 @@
    <input type="text" name="" id="txt3">
 
 
- <input type="button" name="" id="" value="click" onclick="fun1()">	
+ <input type="button" name="" id="" value="click" onclick=
+ "fun1()">	
 
-
+<div id="div1"></div>
 
 </body>
 </html>

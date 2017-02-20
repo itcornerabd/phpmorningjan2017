@@ -17,5 +17,11 @@ function fun1()
 	var txt3 = txt1+txt2;
 
 	document.getElementById('txt3').value = txt3;
+	//document.getElementById('div1').innerHTML= "<a href='demo.php'> hello world</a>";
+	document.getElementById('div1').innerHTML = "<h1>"+txt3+"</h1>";
+
+
+	var div1 = document.getElementById('div1').innerHTML;	
+
 	// alert (txt1); 
 }
