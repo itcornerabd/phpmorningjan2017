@@ -1,6 +1,4 @@
 <?php 
-session_start();
-
 require ("./include/constr.php");  
 
 if(!isset($_SESSION['username']))
@@ -86,10 +84,76 @@ Welcome <?php echo $_SESSION['username']; ?>
 
 <?php endforeach ?>
 </table>
+
+<hr>
+<button id="btnyellow" class="btn">yellow</button>
+<button id="btnblue"  class="btn">blue</button>
+<button id="btnred"  class="btn">red</button>
+
+<br><br><br>
 </center>
 
 </body>
 </html>
+
+<script type="text/javascript" src="./../jquery.js"></script>
+
+<script type="text/javascript">
+	
+	//$("tr:eq(0)").addClass('yellow');		
+
+	//$("tr:contains(Comedy)").addClass('yellow');	
+
+	//$("td:contains(Comedy)").parent().addClass('yellow');
+
+
+	// $("tr:odd").addClass('yellow');
+	// $("tr:even").addClass('blue');
+	//index wise starts from 0 irrespective of parent 
+
+
+	// $("tr:nth-child(odd)").addClass('yellow');
+	// $("tr:nth-child(even)").addClass('blue');
+
+	// index starts from 1
+
+// $("#btnyellow").click(function() {
+
+// 	$("table").removeClass('blue');
+// 	$("table").addClass('yellow')
+// })
+
+// $("#btnblue").click(function() {
+
+// 	$("table").removeClass('yellow');
+// 	$("table").addClass('blue');
+
+// })
+
+
+$(".btn").click(function() {
+
+	$("table").removeClass();
+	var clsname = $(this).html();
+	console.log(clsname);
+	$("table").addClass(clsname);	
+
+})
+
+
+
+
+</script>	
+
+
+
+
+
+
+
+
+
+
 
 
 
