@@ -72,13 +72,13 @@
 		<tr>
 			<td>Hobby</td>
 			<td>
-				<input type="checkbox" name="hobby[]" value="SPORT" 
+				<input type="checkbox" id="chk1" name="hobby[]" value="SPORT" 
 				<?php if(in_array("SPORT", input('hobby' , false) )) {echo "checked"; } ?>  > SPORT
-				<input type="checkbox" name="hobby[]" value="DANCE" 
+				<input type="checkbox" id="chk2" name="hobby[]" value="DANCE" 
 					<?php if(in_array("DANCE", input('hobby' , false) )) {echo "checked"; } ?>   > DANCE
-				<input type="checkbox" name="hobby[]" value="SINGING"
+				<input type="checkbox" id="chk3" name="hobby[]" value="SINGING"
 					 <?php if(in_array("SINGING", input('hobby' , false) )) {echo "checked"; } ?> > SINGING
-				<input type="checkbox" name="hobby[]" value="PAINTING"
+				<input type="checkbox" id="chk4" name="hobby[]" value="PAINTING"
 					 <?php if(in_array("PAINTING", input('hobby' , false) )) {echo "checked"; } ?> > PAINTING
 
 			</td>
@@ -134,6 +134,26 @@ $("#form1").submit(function() {
 			return false;
 
 		}
+
+		var count = 4;
+
+		var is_checked= false;	
+
+		for(var i=1;i<=count ;i++)
+		{
+			if(document.getElementById('chk'+i).checked)
+				is_checked=true;
+		}
+
+		if(!is_checked)
+		{
+
+			alert('please select altleast one hobby');
+			return false;
+		}
+
+
+
 
 })
 
