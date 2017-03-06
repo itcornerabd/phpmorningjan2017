@@ -17,7 +17,7 @@ class movie
 		return $this->name;
 	}
 
-	public function setname($name='')
+	public function setname($name='')	
 	{
 		$this->name = $name; 
 	}
@@ -28,8 +28,9 @@ class comedy extends movie
 {
 	private $plot;
 
-	public function __construct($plot='')
+	public function __construct($name='',$cast='',$release_date='',  $plot='')
 	{
+		parent::__construct($name,$cast,$release_date);
 		$this->plot=$plot;
 	}
 
@@ -40,7 +41,7 @@ class comedy extends movie
 
 
 
-	$movie = new comedy('Kabil','Hritik','2015-2-14');
+	$movie = new comedy('Kabil','Hritik','2015-2-14','new plot');
 
 	// $movie->name ='Kabil';
 	// $movie->cast= 'Hritik'; 
