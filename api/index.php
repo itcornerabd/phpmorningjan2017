@@ -27,17 +27,21 @@
 <body>
 
 <div class="container">
+		
+<button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">Add</button>
+
+<hr>
+
 	<div class="row">
 		<div class="col-md-3">
 				
 			<div class="row" id="categories">
 						
-				<div class="col-md-12 categorydiv">
-					<button class="btn btn-info">Comedy</button>	
-				</div>
+				
 			</div>
 
 		</div>	
+
 		<div class="col-md-9" id="movieslist">
 			
 		</div>
@@ -48,6 +52,49 @@
 </div>	
 
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <form id="movieform" name="movieform">
+        	
+        	<div class="form-group">
+        		<input type="text" name="name" placeholder="Enter Movie Name" class="form-control">
+        	</div>
+        	<div class="form-group">
+        		<input type="text" name="cast" placeholder="Enter Movie Cast" class="form-control">
+        	</div>
+        	<div class="form-group">
+        		<input type="date" name="release_date" placeholder="Enter Movie Release Date" class="form-control">
+        	</div>
+        	<div class="form-group">
+        		<textarea name="plot" class="form-control" placeholder="Enter Movie Plot"></textarea>
+        	</div>
+        	<div class="form-group">
+        		<select name="category_id" id="category_id" class="form-control">
+        			<option value="">--Select Category--</option>
+        		</select>	
+        	</div>
+
+        	<div id="errormsg">
+        		
+        	</div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="btnsave" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>
 
@@ -56,73 +103,6 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="./js/bootstrap.min.js"></script>
 
- <script type="text/javascript">
- var html ='';	
- $.getJSON('./api/categories.php' ,function(response) {
-
- 	//console.log(response);
- 	if(response.status!="success")
- 	{
- 		alert('Some Error Occured');
- 		return false;
- 	}
-
- 	html='';
-
- 	$.each(response.data, function(index,category) {
-	
- 	html+='<div class="col-md-12 categorydiv"><button class="btn btn-primary btncategory "  data-id="'+category.id+'" >'+category.name+'</button></div>'	
-
- 	})
-
- 	$("#categories").html(html);	
-
-
-
- })
-
-// $(".btncategory").click(function() {
-// 	alert('btn clicked');
-// })
-
-$("body").on('click','.btncategory',function() {
-
- var categoryid = $(this).attr('data-id')
-
- var getdata = {'category_id':categoryid};
-
- $.getJSON('./api/movies.php',getdata,function(response) {
-
- 	console.log(response);
- 	if(response.status!="success")
- 	{
- 		$("#movieslist").html('<h3>'+ response.errormsg +'</h3>');
- 		return false
- 	}
-
- 	html='';
-
- 	$.each(response.data,function(index,movie) {
-
- 		html +='<div class="panel panel-info">'
-		html +='<div class="panel-heading">'
-		html +=movie.name
-		html +='</div>'
-		html +='<div class="panel-body">'
-		html +=movie.cast;
-		html +='</div>'
-		html +='</div>'
-			
-
- 	})
- 	$("#movieslist").html(html);
-
- })	
-
-
-})
-
-
-
+ <script type="text/javascript" src="index.js">
  </script>   
 
