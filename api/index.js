@@ -49,7 +49,7 @@ $("body").on('click','.btncategory',function() {
 
  		html +='<div class="panel panel-info">'
 		html +='<div class="panel-heading">'
-		html +=movie.name
+		html +=movie.name + ' <div class="pull-right"> <a href="#" class="editmovie"  data-id="'+movie.id+'" ><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>  </a> </div> '
 		html +='</div>'
 		html +='<div class="panel-body">'
 		html +=movie.cast;
@@ -69,8 +69,15 @@ $("body").on('click','.btncategory',function() {
 $("#btnsave").click(function() {
 
 	var postdata = $("#movieform").serialize();
+	var url;
+	if($("#action").val()=="SAVE")
+		url = "add_movie.php"
+	else if ($("#action").val()=="UPDATE")
+		url = "updatemovie.php";
+	else
+		return false;	
 
-	$.post('./api/add_movie.php' , postdata, function(response) {
+	$.post('./api/'+url , postdata, function(response) {
 
 		response= $.parseJSON(response);
 
@@ -91,4 +98,46 @@ $("#btnsave").click(function() {
 
 })
 
+$("#btnadd").click(function() {
+
+
+$("#name").val('')
+$("#cast").val('')
+$("#release_date").val('')
+$("#plot").val('')
+$("#category_id").val('')
+$("#action").val('SAVE');
+$("#id").val(0);
+
+$("#myModal").modal('show');
+
+})
+
+$("body").on('click' , '.editmovie' ,function(event) {
+	var movieid = $(this).attr('data-id');
+	console.log(movieid);
+	event.preventDefault();
+	
+	var getdata = {'id':movieid};
+
+	$.getJSON('./api/movie.php' ,getdata,function(response) {
+
+		if(response.status!="success")
+		{
+			alert('some error occured');
+			return false;
+		}
+
+		$("#name").val(response.data.name)
+		$("#cast").val(response.data.cast)
+		$("#release_date").val(response.data.release_date)
+		$("#plot").val(response.data.plot)
+		$("#category_id").val(response.data.category_id)
+		$("#action").val('UPDATE');
+		$("#id").val(movieid);
+		
+		$("#myModal").modal('show');	
+	})
+
+})
 

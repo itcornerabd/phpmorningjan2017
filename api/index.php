@@ -28,7 +28,7 @@
 
 <div class="container">
 		
-<button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal">Add</button>
+<button class="btn btn-lg btn-primary"  id="btnadd" >Add</button>
 
 <hr>
 
@@ -63,23 +63,24 @@
         <form id="movieform" name="movieform">
         	
         	<div class="form-group">
-        		<input type="text" name="name" placeholder="Enter Movie Name" class="form-control">
+        		<input type="text" name="name" id="name" placeholder="Enter Movie Name" class="form-control">
         	</div>
         	<div class="form-group">
-        		<input type="text" name="cast" placeholder="Enter Movie Cast" class="form-control">
+        		<input type="text" name="cast" id="cast" placeholder="Enter Movie Cast" class="form-control">
         	</div>
         	<div class="form-group">
-        		<input type="date" name="release_date" placeholder="Enter Movie Release Date" class="form-control">
+        		<input type="date" name="release_date" id="release_date" placeholder="Enter Movie Release Date" class="form-control">
         	</div>
         	<div class="form-group">
-        		<textarea name="plot" class="form-control" placeholder="Enter Movie Plot"></textarea>
-        	</div>
+        		<textarea name="plot" class="form-control" id="plot" placeholder="Enter Movie Plot"></textarea>
+        	</div> 
         	<div class="form-group">
         		<select name="category_id" id="category_id" class="form-control">
         			<option value="">--Select Category--</option>
         		</select>	
         	</div>
-
+            <input type="hidden" name="action" id="action" value="SAVE">
+            <input type="hidden" name="id" id="id" value="0" >
         	<div id="errormsg">
         		
         	</div>
@@ -93,6 +94,9 @@
     </div>
   </div>
 </div>
+
+
+
 
 
 </body>
